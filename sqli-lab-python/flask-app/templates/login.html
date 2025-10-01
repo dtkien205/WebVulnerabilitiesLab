@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #0b0f18;
+            font-family: 'Roboto', Arial, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d8f6ff;
+        }
+
+        .login-container {
+            background: #101826;
+            padding: 32px 28px 24px 28px;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+            width: 350px;
+            max-width: 90vw;
+        }
+
+        h1 {
+            text-align: center;
+            color: #7fd7ff;
+            margin-bottom: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            color: #d8f6ff;
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-size: 1rem;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #2a3c4f;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #0b1622;
+            color: #d8f6ff;
+            transition: border 0.2s, background 0.2s;
+            margin-bottom: 0;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border: 1.5px solid #7fd7ff;
+            outline: none;
+            background: #101826;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #3182ce 60%, #63b3ed 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 2px 8px rgba(49, 130, 206, 0.08);
+            margin-top: 6px;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(90deg, #2563eb 60%, #4299e1 100%);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .example-accounts {
+            background: #0b1622;
+            color: #7fd7ff;
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin: 18px 0 8px 0;
+            font-size: 0.98rem;
+            border: 1px solid #2a3c4f;
+        }
+
+        .note {
+            color: #7fd7ff;
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        .error-message {
+            color: #ff8080;
+            background: #2a1a1a;
+            border: 1px solid #ff8080;
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin-bottom: 16px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h1>Login <span style="font-size:0.7em;color:#7fd7ff;">(vulnerable)</span></h1>
+        {% if error %}
+        <div class="error-message">{{ error }}</div>
+        {% endif %}
+        <form method="post" action="/login">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" autocomplete="current-password">
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <div class="example-accounts">
+            Example accounts:<br>
+            <strong>admin/adminpass</strong>, <strong>alice/alicepass</strong>
+        </div>
+        <p class="note">Muốn thử SQLi, nhập payload thay cho username hoặc password.</p>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Products</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: #0b0f18;
+            color: #d8f6ff;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #101826;
+            border-radius: 14px;
+            box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
+            padding: 32px 28px 24px 28px;
+        }
+
+        h1 {
+            color: #7fd7ff;
+            text-align: center;
+            margin-bottom: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 18px;
+            color: #7fd7ff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.01rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .query-box {
+            background: #0b1622;
+            border: 1px solid #2a3c4f;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-family: 'Fira Mono', 'Consolas', monospace;
+            font-size: 0.98rem;
+            margin-bottom: 18px;
+            color: #7fd7ff;
+            word-break: break-all;
+        }
+
+        .error-message {
+            color: #ff8080;
+            background: #2a1a1a;
+            border: 1px solid #ff8080;
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin-bottom: 16px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            background: #0b1622;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            border: 1px solid #2a3c4f;
+            padding: 12px 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #102030;
+            color: #7fd7ff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #111a28;
+        }
+
+        tr:nth-child(odd) {
+            background: #0b1622;
+        }
+
+        .no-product {
+            color: #ff8080;
+            text-align: center;
+            margin-top: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="{{ url_for('index') }}" class="back-link">&larr; Back</a>
+        <h1>Available Products 🚀</h1>
+
+        <div class="query-box">{{ query }}</div>
+
+        {% if error %}
+        <div class="error-message">Error: {{ error }}</div>
+        {% endif %}
+
+        {% if rows %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in rows %}
+                <tr>
+                    <td>{{ r['id'] }}</td>
+                    <td>{{ r['name'] }}</td>
+                    <td>{{ r['description'] }}</td>
+                    <td>${{ r['price'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="no-product">No product found.</div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
