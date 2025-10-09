@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>DOM-based XSS</h2>
+
+<div class="card">
+    <strong>Thông báo:</strong>
+    <div id="out" class="muted">(chưa có nội dung)</div>
+</div>
+
+<script>
+    // LỖ HỔNG: lấy dữ liệu từ URL rồi đưa vào innerHTML trực tiếp
+    (function () {
+        const params = new URLSearchParams(location.search);
+        const msg = params.get('msg') || decodeURIComponent(location.hash.slice(1) || '');
+        if (msg) {
+            // Sink nguy hiểm:
+            document.getElementById('out').innerHTML = msg;
+        }
+    })();
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <title>XSS Lab</title>
+    <!-- KHÔNG có CSP để demo XSS dễ dàng -->
+
+
+    <style>
+        :root {
+            --bg: #ffffff;
+            /* --bg-soft: #f8fafc; */
+            --card: #ffffff;
+            --border: #e5e7eb;
+            --text: #0f172a;
+            /* slate-900 */
+            --muted: #64748b;
+            /* slate-500 */
+            --primary: #2563eb;
+            /* xanh dương chủ đạo */
+            --primary-600: #1d4ed8;
+            --ring: #93c5fd;
+            --code-bg: #f1f5f9;
+            --shadow: 0 6px 24px rgba(2, 6, 23, .06), 0 2px 8px rgba(2, 6, 23, .04);
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            color: var(--text);
+            background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+        }
+
+        /* Khung trang */
+        .container {
+            max-width: 980px;
+            margin: 32px auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+            letter-spacing: .2px;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 10px 14px;
+            margin-right: 8px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--primary);
+            background: #fff;
+            transition: all .18s ease;
+        }
+
+        nav a:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--ring);
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 16px 0 0 0;
+        }
+
+        /* Nội dung */
+        .page {
+            margin-top: 16px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            box-shadow: var(--shadow);
+            margin: 12px 0;
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        /* Form */
+        form {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            box-shadow: var(--shadow);
+            margin: 12px 0 18px;
+        }
+
+        input[type="text"],
+        input[type="search"],
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            outline: none;
+            background: #fff;
+            color: var(--text);
+            transition: border-color .18s ease, box-shadow .18s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--ring);
+        }
+
+        button {
+            appearance: none;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 16px;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .18s ease, transform .06s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: var(--primary-600);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        /* Code & pre */
+        code,
+        pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 2px 6px;
+        }
+
+        pre {
+            padding: 12px;
+            overflow: auto
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        th,
+        td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border);
+            text-align: left;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        thead th {
+            background: #eff6ff;
+            color: #1e3a8a;
+            font-weight: 700;
+        }
+
+        a {
+            color: var(--primary);
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .note {
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        /* Responsive */
+        @media (max-width:640px) {
+            header h1 {
+                font-size: 22px;
+            }
+
+            nav a {
+                padding: 8px 12px
+            }
+        }
+
+        /* ==== Form cho trang Stored ==== */
+        .form {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-row {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .label {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .input,
+        .textarea {
+            width: 100%;
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            padding: 12px 14px;
+            background: #fff;
+            outline: none;
+            transition: border-color .18s ease, box-shadow .18s ease, transform .06s;
+        }
+
+        .input:hover,
+        .textarea:hover {
+            border-color: #d1d5db;
+        }
+
+        .input:focus,
+        .textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--ring);
+        }
+
+        .textarea {
+            min-height: 160px;
+            resize: vertical;
+        }
+
+        .btn-row {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-primary {
+            appearance: none;
+            border: 0;
+            border-radius: 14px;
+            padding: 12px 18px;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: .2px;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(37, 99, 235, .18);
+            transition: transform .06s ease, background .18s ease, box-shadow .18s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-600);
+            box-shadow: 0 8px 18px rgba(37, 99, 235, .24);
+        }
+
+        .btn-primary:active {
+            transform: translateY(1px);
+        }
+
+        .help {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* Mobile */
+        @media (max-width: 640px) {
+            .btn-row {
+                justify-content: stretch;
+            }
+
+            .btn-primary {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>XSS Lab (Reflected - Stored - DOM)</h1>
+            <nav>
+                <a href="{{ url_for('index_reflected') }}">Reflected</a>
+                <a href="{{ url_for('comments_stored') }}">Stored</a>
+                <a href="{{ url_for('dom_based') }}">DOM-based</a>
+            </nav>
+            <hr />
+        </header>
+
+        <main class="page">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+
+
+</html>

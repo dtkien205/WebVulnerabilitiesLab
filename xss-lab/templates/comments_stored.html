@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Stored XSS</h2>
+
+<form class="form" method="post" action="/comments">
+    <div class="form-row">
+        <label class="label" for="author">Tên (tùy chọn)</label>
+        <input id="author" name="author" class="input" placeholder="VD: Kido, Mei..." />
+    </div>
+
+    <div class="form-row">
+        <label class="label" for="content">Nội dung bình luận</label>
+        <textarea id="content" name="content" class="textarea" placeholder="Nhập nội dung bình luận"></textarea>
+        <div class="help">Gợi ý: thử &lt;svg/onload=alert('stored')&gt; (dành cho demo lỗ hổng).</div>
+    </div>
+
+    <div class="btn-row">
+        <button class="btn-primary" type="submit">Đăng bình luận</button>
+    </div>
+</form>
+
+
+<h3>Danh sách bình luận</h3>
+{% for id, author, content in rows %}
+<div class="card">
+    <div><strong>{{ author }}</strong></div>
+    <div>
+        <!-- LỖ HỔNG: render raw HTML đã lưu -->
+        {{ content | safe }}
+    </div>
+</div>
+{% else %}
+<p class="muted">Chưa có bình luận nào.</p>
+{% endfor %}
+
+{% endblock %}
