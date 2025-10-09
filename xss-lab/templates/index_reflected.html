@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Reflected XSS (các lỗi hay gặp)</h2>
+<h2>Reflected XSS</h2>
 
 <form method="get" action="/" class="form">
     <div class="form-row">
@@ -31,7 +31,7 @@ Mô tả: {{ item[3] }}</pre>
 </div>
 {% elif q %}
 <div class="card">
-    <em class="muted">Hãy nhập số id để tìm</em>
+    <em class="muted">Không tìm thấy item có id = {{ q }} hoặc id không hợp lệ</em>
 </div>
 {% endif %}
 
