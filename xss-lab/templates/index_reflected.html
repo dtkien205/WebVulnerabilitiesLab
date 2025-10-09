@@ -1,19 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Reflected XSS</h2>
+<h2>Reflected XSS (các lỗi hay gặp)</h2>
 
-<form method="get" action="/">
-    <input type="text" name="q" placeholder="Nhập nội dung để phản chiếu lại..." value="{{ q }}">
-    <button type="submit">Tìm</button>
+<form method="get" action="/" class="form">
+    <div class="form-row">
+        <label class="label" for="q">Nhập id</label>
+        <input id="q" type="text" name="q" class="input" placeholder="Nhập số id cần tìm" value="{{ q }}">
+    </div>
+    <div class="btn-row">
+        <button type="submit" class="btn-primary">Tìm</button>
+    </div>
 </form>
 
+<!-- JS context injection (không tojson/không ép kiểu) -->
+<script>
+    // VULN: nếu q không phải số, có thể thoát lệnh JS
+    var id = {{ q }};
+</script>
+
+
+<!-- Kết quả truy vấn items khi q là số -->
+{% if item %}
 <div class="card">
-    <strong>Kết quả phản hồi:</strong>
-    <div>
-        <!-- LỖ HỔNG: dùng |safe khiến nội dung q được chèn thẳng vào DOM -->
-        {{ q | safe }}
-    </div>
+    <strong>Kết quả items theo id = {{ item[0] }}</strong>
+    <pre>ID: {{ item[0] }}
+Tên: {{ item[1] }}
+Giá: {{ "%.2f"|format(item[2]) }}
+Mô tả: {{ item[3] }}</pre>
 </div>
+{% elif q %}
+<div class="card">
+    <em class="muted">Hãy nhập số id để tìm</em>
+</div>
+{% endif %}
 
 {% endblock %}

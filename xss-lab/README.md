@@ -16,11 +16,22 @@ Mở: `http://localhost:5001`
 ---
 
 ## 1) Reflected XSS
-URL mẫu:
-- `http://localhost:5001/?q=<script>alert(1)</script>`
-- `http://localhost:5001/?q=<img src=x onerror=alert(1)>`
+Trong template có dòng:
+```js
+<script>
+    var id = {{ q }};
+</script>
+```
 
-Nguyên nhân: biến q được render với `|safe` → phản chiếu trực tiếp.
+Nếu q không phải số, có thể thoát lệnh JS.
+
+Payload mẫu:
+- `1;alert(1337)`
+- `1;alert(location.hostname)`
+- ```1;alert(`Hello`)```
+
+Vì sao `1;alert("x")//` không được? Vì Jinja auto-escape đổi " thành `&quot;` → code thành `alert(&quot;x&quot;)` (JS lỗi cú pháp).
+→ dùng backtick ``
 
 ## 2) Stored XSS
 - Vào `http://localhost:5001/comments`
