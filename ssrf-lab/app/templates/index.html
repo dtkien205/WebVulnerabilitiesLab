@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SSRF Lab</title>
+    <style>
+        body {
+            background: #f6faff;
+            color: #145da0;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 16px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #2e8bc0;
+            letter-spacing: 1px;
+            margin-top: 40px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .card {
+            background: #eaf6fb;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(20, 93, 160, 0.08);
+            border: 1px solid #2e8bc022;
+            padding: 28px 24px;
+            margin: 24px auto 18px auto;
+            max-width: 620px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        label {
+            font-weight: 500;
+            color: #145da0;
+            margin-bottom: 4px;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        input[type=url] {
+            flex: 1 1 auto;
+            padding: 12px;
+            background: #fff;
+            color: #145da0;
+            border: 1.5px solid #2e8bc0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border 0.2s, box-shadow 0.2s;
+            min-width: 0;
+            /* tránh tràn trong flex */
+        }
+
+        input[type=url]:focus {
+            border: 2px solid #145da0;
+            box-shadow: 0 0 0 2px #2e8bc033;
+            outline: none;
+        }
+
+        button {
+            background: linear-gradient(90deg, #2e8bc0, #145da0);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 18px;
+            font-weight: bold;
+            font-size: 1.05em;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(20, 93, 160, 0.10);
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            width: auto;
+            white-space: nowrap;
+            flex: 0 0 auto;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #145da0, #2e8bc0);
+            color: #eaf6fb;
+            box-shadow: 0 4px 16px rgba(20, 93, 160, 0.18);
+        }
+
+        .muted {
+            color: #2e8bc0;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        code {
+            background: #f6faff;
+            color: #145da0;
+            padding: 2px 7px;
+            border-radius: 6px;
+            font-size: 1em;
+        }
+
+        details {
+            background: #eaf6fb;
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin-top: 24px;
+            color: #145da0;
+            border: 1px solid #2e8bc022;
+            max-width: 620px;
+            width: 100%;
+        }
+
+        summary {
+            font-weight: bold;
+            color: #2e8bc0;
+            font-size: 1.08em;
+        }
+
+        ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>SSRF Lab</h1>
+    <p class="muted">Chức năng thử URL sẽ gửi HTTP từ <em>server</em> đến URL bạn nhập và trả về nội dung.</p>
+
+    <div class="card">
+        <form action="/fetch" method="get">
+            <label>Nhập URL để server tải về:</label>
+            <div class="row">
+                <input type="url" name="url" placeholder="https://example.com/" required>
+                <button type="submit">Fetch</button>
+            </div>
+        </form>
+    </div>
+
+    <details style="margin-top:16px">
+        <summary>Gợi ý lab</summary>
+        <ul>
+            <li>Thử truy cập tài nguyên nội bộ, ví dụ <code>/admin</code> trên chính server.</li>
+            <li>Để ý bộ lọc chuỗi và nghĩ cách biểu diễn IP khác (IPv6, số thập phân, hex, domain wildcard).</li>
+        </ul>
+    </details>
+</body>
+
+</html>

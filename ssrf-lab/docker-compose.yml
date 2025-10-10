@@ -1,0 +1,12 @@
+services:
+  web:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    environment:
+      - FLAG=flag{ssrf_demo_flag_only_local}
+    volumes:
+      - ./app:/app
+    restart: unless-stopped
