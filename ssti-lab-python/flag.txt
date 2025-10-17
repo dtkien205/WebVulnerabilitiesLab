@@ -1,0 +1,1 @@
+FLAG{this_is_demo_flag_for_SSTI_lab_only}

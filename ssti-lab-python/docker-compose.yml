@@ -1,0 +1,10 @@
+services:
+  ssti-lab:
+    build: .
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app 
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped

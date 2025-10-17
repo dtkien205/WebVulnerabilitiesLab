@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Safe preview (không khai thác được)</h2>
+
+<form method="get" action="/safe-preview">
+    <input type="text" name="q" style="width: 100%" value="{{ q|e }}">
+    <button type="submit">Gửi</button>
+</form>
+
+<div class="card">
+    <strong>Output (được escape an toàn):</strong>
+    <div class="result">{{ q }}</div>
+</div>
+
+<div style="margin: 8px 0 16px;">
+    <a href="/" class="btn btn-outline">← Quay về trang có lỗ hổng</a>
+</div>
+{% endblock %}
