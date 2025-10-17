@@ -1,0 +1,9 @@
+services:
+  twig-ssti:
+    build: .
+    ports:
+      - "4001:80" # host:container
+    volumes:
+      - ./public:/var/www/html/public
+      - ./templates:/var/www/html/templates
+    restart: unless-stopped

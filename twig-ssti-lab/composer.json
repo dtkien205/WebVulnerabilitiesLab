@@ -1,0 +1,8 @@
+{
+    "name": "you/twig-ssti-lab",
+    "description": "SSTI lab with PHP + Twig (vulnerable by design)",
+    "type": "project",
+    "require": {
+        "twig/twig": "^3.8"
+    }
+}
