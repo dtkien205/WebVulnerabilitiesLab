@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: sqli_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: sqli_lab
+      MYSQL_USER: app
+      MYSQL_PASSWORD: app123
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "3307:3306"
+
+  web:
+    build: . # build ngay từ thư mục gốc
+    container_name: sqli_web
+    environment:
+      DB_HOST: db
+      DB_NAME: sqli_lab
+      DB_USER: app
+      DB_PASS: app123
+    ports:
+      - "5004:5004"
+    volumes:
+      - ./:/app
+    depends_on:
+      - db

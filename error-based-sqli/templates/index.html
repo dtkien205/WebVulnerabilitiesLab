@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Kết quả</h3>
+<p class="{{ 'ok' if not error else '' }}">{{ message }}</p>
+
+<hr>
+<h3>Debug</h3>
+<p class="muted">Last SQL:</p>
+<pre class="muted">{{ last_sql }}</pre>
+
+{% if error %}
+<p class="muted">MySQL error:</p>
+<pre class="err">{{ error }}</pre>
+{% endif %}
+
+{% endblock %}
