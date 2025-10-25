@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Đăng nhập</h1>
+<p class="muted">Tài khoản tồn tại: <code>admin</code>.</p>
+
+<form method="post" class="form">
+    <div class="row">
+        <input type="text" name="username" placeholder="username" required>
+        <input type="text" name="password" placeholder="password" required>
+        <button type="submit">Login</button>
+    </div>
+</form>
+
+{% if msg %}
+{% if msg[0] == "success" %}
+<p class="ok"> {{ msg[1] }}</p>
+{% else %}
+<p class="no"> {{ msg[1] }}</p>
+{% endif %}
+{% endif %}
+
+{% endblock %}

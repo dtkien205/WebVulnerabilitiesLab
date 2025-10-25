@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: blindlogin
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppass
+    ports:
+      - "33070:3306"
+    volumes:
+      - ./mysql/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h localhost -u root -prootpass || exit 1" ]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  web:
+    build: ./app
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_USER: appuser
+      DB_PASS: apppass
+      DB_NAME: blindlogin
+      FLASK_ENV: production
+    ports:
+      - "5005:5005"
+    volumes:
+      - ./app:/app
+    depends_on:
+      db:
+        condition: service_healthy
