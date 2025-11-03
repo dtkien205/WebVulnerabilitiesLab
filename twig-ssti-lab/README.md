@@ -1,8 +1,6 @@
 # Twig SSTI Lab (PHP + Twig)
 
-
-## Giới thiệu
-Lab mô phỏng lỗ hổng **SSTI (Server‑Side Template Injection)** trong **Twig**. Ứng dụng cố tình **nhúng trực tiếp** dữ liệu người dùng vào **chuỗi template** rồi render bằng `createTemplate(...)->render(...)`, khiến Twig biên dịch và thực thi biểu thức do người dùng cung cấp.
+Lab mô phỏng lỗ hổng SSTI (Server‑Side Template Injection) trong Twig. Ứng dụng cố tình nhúng trực tiếp dữ liệu người dùng vào chuỗi template rồi render bằng `createTemplate(...)->render(...)`, khiến Twig biên dịch và thực thi biểu thức do người dùng cung cấp.
 
 ---
 

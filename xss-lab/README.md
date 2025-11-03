@@ -1,4 +1,6 @@
-# XSS Lab (Reflected • Stored • DOM)
+# XSS Lab (Reflected - Stored - DOM)
+
+Lab này mô phỏng một ứng dụng web nhỏ để người học hiểu, nhận diện và khai thác ba dạng XSS phổ biến: Reflected XSS, Stored XSS, và DOM-based XSS. Ứng dụng là một trang ghi chú/bình luận đơn giản viết bằng Python (Jinja2) với một trang DOM demo. Mỗi phần tương ứng với một kiểu XSS và có sẵn payload mẫu để khởi động.
 
 ## Chạy bằng Python thuần
 python -m venv venv

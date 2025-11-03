@@ -1,4 +1,7 @@
-# Lab: Error‑Based SQLi (Flask + MySQL + Docker)
+# Error‑Based SQLi (Flask + MySQL + Docker)
+
+Mục tiêu của lab là giúp bạn hiểu và khai thác Error-Based SQL Injection trên ứng dụng Flask + MySQL thông qua cookie TrackingId. Bạn sẽ thực hành gây lỗi cú pháp và sử dụng các hàm tạo lỗi chứa dữ liệu (như updatexml/extractvalue) để làm rò rỉ thông tin ngay trên trang. Từ đó, bạn lần lượt liệt kê database → bảng → cột qua information_schema và cuối cùng trích xuất FLAG từ bảng flags(flag).
+
 ## Cách build & chạy
 ```bash
 # 1) Khởi động

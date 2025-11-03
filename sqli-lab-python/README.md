@@ -1,5 +1,7 @@
 # SQLi Lab (UNION BASED)
 
+Lab này giúp bạn nắm vững kỹ thuật SQL Injection dạng UNION trên ứng dụng demo. Bạn sẽ thực hành: (1) bypass đăng nhập bằng payload ghép chuỗi; (2) xác định số cột/kiểu dữ liệu hiển thị; (3) dùng UNION SELECT để trích xuất dữ liệu từ information_schema (liệt kê database → bảng → cột) và cuối cùng đọc dữ liệu nhạy cảm (ví dụ users/flags). Qua đó, bạn hiểu quy trình khai thác thực tế và các biện pháp phòng tránh cơ bản.
+
 ## Chạy bằng Python thuần
 ```bash
 python -m venv venv

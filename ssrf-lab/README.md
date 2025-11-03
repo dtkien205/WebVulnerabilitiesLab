@@ -1,6 +1,6 @@
 # SSRF Lab
 
-> **Mục tiêu**: Thực hành tấn công SSRF (Server-Side Request Forgery) qua một chức năng "server tải nội dung từ URL".
+Lab này giúp bạn thực hành SSRF trên chức năng “server tải nội dung từ URL”, từ đó buộc máy chủ gửi yêu cầu tới dịch vụ nội bộ/loopback. Bạn sẽ thử các kỹ thuật bypass denylist (IPv4 decimal/hex, mixed, shorthand, domain trỏ loopback như localtest.me, sslip.io) và theo dõi lợi dụng redirect để tiếp cận tài nguyên nội bộ. Điểm đích là truy cập trang /admin nội bộ và đọc FLAG.
 
 ## 1) Cách chạy
 ```bash

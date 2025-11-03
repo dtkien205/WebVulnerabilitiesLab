@@ -1,27 +1,9 @@
 # SSTI Lab (Flask + Jinja2)
 
-## 1) Giới thiệu
-
-Lab mô phỏng lỗ hổng **SSTI (Server-Side Template Injection)** trong **Flask/Jinja2**. Ứng dụng cố tình **nhúng trực tiếp** dữ liệu do người dùng nhập vào **chuỗi template** rồi render bằng `render_template_string(...)`, dẫn đến Jinja2 biên dịch và thực thi biểu thức template do người dùng cung cấp.
+Lab mô phỏng lỗ hổng SSTI (Server-Side Template Injection) trong Flask/Jinja2. Ứng dụng cố tình nhúng trực tiếp dữ liệu do người dùng nhập vào chuỗi template rồi render bằng render_template_string(...), dẫn đến Jinja2 biên dịch và thực thi biểu thức template do người dùng cung cấp.
 
 Bản lab có kèm **“naive WAF”** minh họa, chặn một số token thường thấy trong khai thác SSTI:  
 `'.'`, `'_'`, `'|join'`, `'['`, `']'`, `'mro'`, `'base'`.
-
----
-
-## 2) Cấu trúc thư mục
-
-```
-ssti-lab/
-├─ app.py                 # Ứng dụng Flask (có lỗ hổng SSTI + naive WAF)
-├─ requirements.txt       # Thư viện Python
-├─ Dockerfile             # Image chạy app
-├─ docker-compose.yml     # Chạy nhanh bằng compose
-├─ templates/
-│  ├─ base.html           # Khung giao diện
-│  └─ index.html          # Trang "an toàn" (safe-preview)
-└─ README.md              # Tài liệu (file này)
-```
 
 ---
 

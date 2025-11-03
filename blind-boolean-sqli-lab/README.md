@@ -1,9 +1,6 @@
 # Blind Boolean-based SQLi Lab(Flask + MySQL + Docker)
 
-## Mục tiêu
-- Minh họa **Blind Boolean-based SQL Injection** trên **trang đăng nhập**.
-- Username cố định `admin`. **Mật khẩu = FLAG** lưu trong DB.
-- Ứng dụng **không** hiển thị lỗi SQL; chỉ báo *“Đăng nhập thành công/Thất bại”*.
+Mục tiêu của lab này là minh họa kỹ thuật Blind Boolean-based SQL Injection trên trang đăng nhập. Tài khoản đăng nhập cố định là admin, còn mật khẩu chính là FLAG được lưu trong cơ sở dữ liệu. Ứng dụng không hiển thị lỗi SQL mà chỉ phản hồi hai trạng thái “Đăng nhập thành công” hoặc “Đăng nhập thất bại”, vì vậy người học sẽ phải khai thác bằng cách đưa vào các biểu thức điều kiện để suy luận từng phần của FLAG từ phản hồi true/false.
 
 ## Chạy lab
 ```bash
