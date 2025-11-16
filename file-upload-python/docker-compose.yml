@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  file-upload-lab:
+    build: .
+    container_name: file-upload-ctf-lab
+    ports:
+      - "5006:5000"
+    volumes:
+      - ./uploads:/app/uploads
+    restart: unless-stopped
